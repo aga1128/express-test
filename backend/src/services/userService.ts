@@ -1,4 +1,6 @@
-export const findAll = async () => {
-  // DBから取得
-  return { message : "aaa" };
+import * as userModel from '../models/userModel.js';
+
+export const getUsers = async () => {
+  const users = await userModel.getUsers();
+  return users;
 };

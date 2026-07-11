@@ -6,7 +6,6 @@ const app: Express = express();
 const PORT = 3000;
 
 app.use(cors());
-// app.use(myLogger);
 
 app.get('/', (req: Request, res: Response) => {
   res.send("こんにちは");
