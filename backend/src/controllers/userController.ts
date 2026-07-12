@@ -9,6 +9,8 @@ export const getUsers = async (req: Request, res: Response) => {
   res.status(200).json(users);
 };
 
-export const getUserInfo = async (req: Request, res: Response) => {
-  res.send('ユーザー情報です。');
+export const getUser = async (req: Request, res: Response) => {
+  const id: number = Number(req.params.id);
+  const user = await userService.getUser(id);
+  res.status(200).json(user);
 };

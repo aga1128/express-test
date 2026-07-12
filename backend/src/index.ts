@@ -13,7 +13,7 @@ app.get('/', (req: Request, res: Response) => {
 
 
 //ルーティング
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 
 app.listen(PORT, () => {

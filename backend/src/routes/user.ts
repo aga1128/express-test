@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.use(authMiddleware.authentication);
 router.get('/', userController.getUsers);
-router.get('/info', userController.getUserInfo)
+router.get('/:id', userController.getUser);
 
 export default router;
