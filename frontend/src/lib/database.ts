@@ -13,13 +13,26 @@ const SQL = await initSqlJs({
 
   db.run(`
     CREATE TABLE users(
-      id INTEGER,
+      id SERIAL PRIMARY KEY,
+      name TEXT,
+      department_id INTEGER,
+      FOREIGN KEY(department_id) REFERENCES departments(id)
+    );
+
+    CREATE TABLE departments(
+      id SERIAL PRIMARY KEY,
       name TEXT
     );
 
     INSERT INTO users VALUES
-    (1,'田中'),
-    (2,'佐藤');
+    (1, '田中', 1),
+    (2, '佐藤', 3),
+    (3, '鈴木', null);
+
+    INSERT INTO departments VALUES
+    (1, '営業課'),
+    (2, '総務課'),
+    (3, '情報サービス課');
   `);
 
   return db;

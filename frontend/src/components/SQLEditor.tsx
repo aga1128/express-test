@@ -65,14 +65,27 @@ const SQLEditor = ({ editorRef }: Props) => {
     });
   }
   return (
-    <Editor
-      height="500px"
-      defaultLanguage="simple-sql"
-      defaultValue="SELECT * FROM users;"
-      theme="simple-sql-theme"
-      beforeMount={handleEditorWillMount}
-      onMount={handleEditorDidMount}
-    />
+    <div className="[&_.monaco-editor]:absolute!">
+      <Editor
+        height="500px"
+        defaultLanguage="simple-sql"
+        defaultValue="SELECT * FROM users AS u
+INNER JOIN departments AS d
+ON u.department_id = d.id;"
+        theme="simple-sql-theme"
+        beforeMount={handleEditorWillMount}
+        onMount={handleEditorDidMount}
+        options={{
+          automaticLayout: true,
+          quickSuggestions: false,
+          minimap: { enabled: false },
+          scrollBeyondLastLine: false,
+          scrollbar: {
+            alwaysConsumeMouseWheel: false,
+          },
+        }}
+      />
+    </div>
   );
 }
 

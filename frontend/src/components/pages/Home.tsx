@@ -24,6 +24,7 @@ const Home = () => {
       const result = db.exec(sql);
 
       setResult(result);
+      console.log("result:", result);
       setError("");
     } catch (e) {
       setError((e as Error).message);
@@ -35,14 +36,17 @@ const Home = () => {
     <>
       <div className="flex justify-center">問題</div>
       {error && <p>{error}</p>}
-      <button onClick={handleRun}>
+      <button onClick={handleRun} className="px-4 py-2 bg-red-400 rounded cursor-pointer">
         実行
       </button>
-      <div className="flex w-full">
-        <div className="w-1/2"><SQLEditor editorRef={editorRef} /></div>
-        <div className="w-1/2"><SQLResult result={result} /></div>
+      <div className="flex w-full gap-1">
+        <div className="w-1/2">
+          <SQLEditor editorRef={editorRef} />
+        </div>
+        <div className="w-1/2">
+          <SQLResult result={result} />
+        </div>
       </div>
-
     </>
   )
 }
