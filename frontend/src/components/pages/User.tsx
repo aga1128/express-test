@@ -1,12 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-
-type User = {
-  id: number,
-  username: string,
-  password: string,
-  email: string,
-  created_at: string;
-}
+import type { UserType } from '../../types/type';
 
 const User = () => {
   const { data, status, isLoading, isError, error } = useQuery({
@@ -16,7 +9,7 @@ const User = () => {
       if(!response.ok){
         throw new Error('Failed to fetch')
       } 
-      const data: User[] = await response.json();
+      const data: UserType[] = await response.json();
       return data
     }
   })
@@ -29,7 +22,7 @@ console.log(data);
           <div>読み込み中...</div>
         ): (
           data && (
-            data.map((user: User) => (
+            data.map((user: UserType) => (
               <div key={user.id}>
                 <div>{user.id}</div>
                 <div>{user.username}</div>

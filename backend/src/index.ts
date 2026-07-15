@@ -1,6 +1,7 @@
 import express, { type Express, type Request, type Response, type NextFunction } from 'express';
 import cors from 'cors';
 import userRouter  from './routes/user.js';
+import questionRouter  from './routes/question.js';
 
 const app: Express = express();
 const PORT = 3000;
@@ -14,6 +15,7 @@ app.get('/', (req: Request, res: Response) => {
 
 //ルーティング
 app.use('/users', userRouter);
+app.use('/questions', questionRouter);
 
 
 app.listen(PORT, () => {
