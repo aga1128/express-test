@@ -9,17 +9,8 @@ const Home = () => {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
 
   const [db, setDb] = useState<any>(null);
-  const [result, setResult] = useState<QuestionType["expected_result"][]>();
+  const [result, setResult] = useState<QuestionType["expected_result"][] | null>(null);
   const [error, setError] = useState("");
-
-  const resultsql = 
-  {
-    columns: ["id", "name", "department_id", "id", "name"],
-    values: [
-      [1, '田中', 1, 1, '営業課'],
-      [2, '佐藤', 3, 3, '情報サービス課']
-    ]
-  }
 
   useEffect(() => {
     createDatabase(`
@@ -62,7 +53,7 @@ const Home = () => {
       setError("");
     } catch (e) {
       setError((e as Error).message);
-      setResult([]);
+      setResult(null);
     }
   };
 
@@ -79,7 +70,7 @@ const Home = () => {
         </div>
         <div className="w-1/2">
         {result && (
-          <SQLResult result={result[0]} />
+          <SQLResult table={result[0]} />
         )}
         </div>
       </div>

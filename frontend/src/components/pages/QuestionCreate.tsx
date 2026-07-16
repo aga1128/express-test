@@ -3,13 +3,15 @@ import type { editor } from 'monaco-editor';
 import { createDatabase } from '../../lib/database';
 import SQLEditor from '../SQLEditor'
 import SQLResult from '../SQLResult'
+import type { QuestionType } from '../../types/type';
+import type { Database, QueryExecResult } from 'sql.js';
 
 const QuestionCreate = () => {
     const questionRef = useRef<editor.IStandaloneCodeEditor | null>(null);
     const answerRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   
-    const [db, setDb] = useState<any>(null);
-    const [result, setResult] = useState<any[]>([]);
+    const [db, setDb] = useState<Database | null>(null);
+    const [result, setResult] = useState<QueryExecResult[] | null>(null);
     const [error, setError] = useState("");
 
     const [title, setTitle] = useState<string>("");
@@ -77,7 +79,7 @@ const QuestionCreate = () => {
             </div>
             <div className="w-1/2">
             {result && (
-              <SQLResult result={result[0]} />
+              <SQLResult table={result[0]} />
             )}
             </div>
           </div>
@@ -92,12 +94,6 @@ const QuestionCreate = () => {
           <div>
             <SQLEditor editorRef={answerRef} />
           </div>
-          <label htmlFor=""></label>
-          <input type="text" className="border" />
-          <label htmlFor=""></label>
-          <input type="text" className="border" />
-          <label htmlFor=""></label>
-          <input type="text" className="border" />
         </div>
       </form>
     </>
